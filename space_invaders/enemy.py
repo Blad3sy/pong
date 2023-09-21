@@ -15,13 +15,13 @@ class Enemy(pygame.sprite.Sprite):
         self.aniIndex = 0
 
         self.image = self.frames[self.aniIndex]
-        self.rect = self.image.get_rect(midleft = (startX, startY))
+        self.rect = self.image.get_rect(center = (startX, startY))
 
         self.movementVal = 8
         self.movementCooldownBase = 80
         self.movementCooldown = 80
         self.speedup = 400
-        self.randomUpperLimit = 1250
+        self.randomUpperLimit = 1000
         self.drop = False
         self.bulletSpeed = 15
     
@@ -40,11 +40,12 @@ class Enemy(pygame.sprite.Sprite):
             self.movementCooldown -= 1
         
         if self.speedup <= 0:
-            if self.movementCooldownBase > 10:
+            if self.movementCooldownBase > 5:
                 self.movementCooldownBase -= 5
                 self.speedup = 400
-            if self.randomUpperLimit >= 750:
-                self.randomUpperLimit - 50
+            if self.randomUpperLimit > 100:
+                self.randomUpperLimit - 100
+            if self.bulletSpeed < 30:    
                 self.bulletSpeed += 1
         else:
             self.speedup -= 1
