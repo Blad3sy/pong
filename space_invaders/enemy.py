@@ -23,7 +23,7 @@ class Enemy(pygame.sprite.Sprite):
         self.speedup = 400
         self.randomUpperLimit = 1250
         self.drop = False
-        self.bulletSpeed = 10
+        self.bulletSpeed = 15
     
     def movement(self):
         if self.movementCooldown <= 0:
@@ -39,10 +39,10 @@ class Enemy(pygame.sprite.Sprite):
         else:
             self.movementCooldown -= 1
         
-        if self.speedup <= 0 and self.movementCooldownBase > 10:
-            self.movementCooldownBase -= 5
-            self.speedup = 400
-
+        if self.speedup <= 0:
+            if self.movementCooldownBase > 10:
+                self.movementCooldownBase -= 5
+                self.speedup = 400
             if self.randomUpperLimit >= 750:
                 self.randomUpperLimit - 50
                 self.bulletSpeed += 1

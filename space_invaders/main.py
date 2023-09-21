@@ -1,11 +1,10 @@
 import pygame
 from sys import exit
-from random import randint
 from player import Player
 from bullet import Bullet
 from enemy import Enemy
+from shield import Shield
 
-# TODO : ADD BUNKERS / SHIELDS
 # TODO : ADD START MENU / GAME OVER MENU / VICTORY MENU
 # TODO : ADD SOUND EFFECTS
 # TODO : ADD OTHER ALIEN TYPES?
@@ -36,6 +35,12 @@ shootCooldown = 60
 
 bullets = pygame.sprite.Group()
 enemyBullets = pygame.sprite.Group()
+
+shields = pygame.sprite.Group()
+shields.add(Shield((75, 700)))
+shields.add(Shield((225, 700)))
+shields.add(Shield((375, 700)))
+shields.add(Shield((525, 700)))
 
 enemies = pygame.sprite.Group()
 for i in range(30, 510, 40):
@@ -89,6 +94,14 @@ while True:
         if enemy.bullet_shoot() == 420:
             enemyBullets.add(Bullet((enemy.rect.center), enemy.bulletSpeed, False))
     
+    collisions = pygame.sprite.groupcollide(shields, enemyBullets, False, True)
+    if collisions:
+        for collider in collisions:
+            for shield in shields:
+                if collider.rect.center == shield.rect.center:
+                    shield.nextState()
+
+    
     if changeDir and changeCooldown <= 1:
         for enemy in enemies:
             enemy.movementVal *= -1
@@ -120,6 +133,8 @@ while True:
 
     enemies.draw(screen)
     enemies.update()
+
+    shields.draw(screen)
 
     pygame.display.update()
     clock.tick(60)
