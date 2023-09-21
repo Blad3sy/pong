@@ -4,7 +4,7 @@ class Paddle(pygame.sprite.Sprite):
     def __init__(self, pos, player1):
         super().__init__()
 
-        self.image = pygame.image.load("pong/assets/paddle.png")
+        self.image = pygame.image.load("retro_games/pong/assets/paddle.png")
         self.rect = self.image.get_rect(midleft = pos)
         self.player1 = player1
 

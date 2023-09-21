@@ -5,7 +5,7 @@ class Ball(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.image = pygame.image.load("pong/assets/ball.png")
+        self.image = pygame.image.load("retro_games/pong/assets/ball.png")
         self.rect = self.image.get_rect(center = (500, 0))
 
         self.exponents = [-1, 1]

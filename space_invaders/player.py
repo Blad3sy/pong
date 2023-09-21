@@ -4,7 +4,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
 
-        self.image = pygame.image.load("space_invaders/assets/player/player.png")
+        self.image = pygame.image.load("retro_games/space_invaders/assets/player/player.png")
         self.image = pygame.transform.rotozoom(self.image, 0, 0.1)
         self.rect = self.image.get_rect(center = pos)
     

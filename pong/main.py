@@ -10,11 +10,11 @@ screen = pygame.display.set_mode((1000, 600))
 screenRect = screen.get_rect(topleft = (0, 0))
 pygame.display.set_caption("Pong")
 
-background = pygame.image.load("pong/assets/background.png")
-midline = pygame.image.load("pong/assets/middle.png")
+background = pygame.image.load("retro_games/pong/assets/background.png")
+midline = pygame.image.load("retro_games/pong/assets/middle.png")
 
 # Score
-mainFont = pygame.font.Font("pong/assets/Pixeltype.ttf", 100)
+mainFont = pygame.font.Font("retro_games/pong/assets/Pixeltype.ttf", 100)
 
 player1ScoreValue = 0
 player2ScoreValue = 0

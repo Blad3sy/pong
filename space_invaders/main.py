@@ -19,10 +19,10 @@ screen = pygame.display.set_mode((600, 900))
 screenRect = screen.get_rect(topleft = (0, 0))
 pygame.display.set_caption("Space Invaders")
 
-background = pygame.image.load("space_invaders/assets/screen/background.png")
-mainFont = pygame.font.Font("space_invaders/assets/Pixeltype.ttf", 65)
+background = pygame.image.load("retro_games/space_invaders/assets/screen/background.png")
+mainFont = pygame.font.Font("retro_games/space_invaders/assets/Pixeltype.ttf", 65)
 
-playerLifeIndicator = pygame.image.load("space_invaders/assets/player/player.png")
+playerLifeIndicator = pygame.image.load("retro_games/space_invaders/assets/player/player.png")
 playerLifeIndicator = pygame.transform.rotozoom(playerLifeIndicator, 0, 0.1)
 
 # Groups

@@ -5,10 +5,10 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self, startX, startY):
         super().__init__()
 
-        image1 = pygame.image.load("space_invaders/assets/enemy/enemy.png")
+        image1 = pygame.image.load("retro_games/space_invaders/assets/enemy/enemy.png")
         image1 = pygame.transform.scale(image1, (33, 24))
 
-        image2 = pygame.image.load("space_invaders/assets/enemy/enemyMove.png")
+        image2 = pygame.image.load("retro_games/space_invaders/assets/enemy/enemyMove.png")
         image2 = pygame.transform.scale(image2, (33, 24))
 
         self.frames = [image1, image2]
