@@ -42,11 +42,11 @@ class Enemy(pygame.sprite.Sprite):
         if self.speedup <= 0:
             if self.movementCooldownBase > 5:
                 self.movementCooldownBase -= 5
-                self.speedup = 400
             if self.randomUpperLimit > 100:
                 self.randomUpperLimit - 100
             if self.bulletSpeed < 30:    
                 self.bulletSpeed += 1
+            self.speedup = 400
         else:
             self.speedup -= 1
     
