@@ -1,15 +1,17 @@
 import pygame
 
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self, parentPos, speed, friendly):
+    def __init__(self, parentPos, speed, friendly, heightScalar):
         super().__init__()
         if friendly:
             self.image = pygame.image.load("retro_games/space_invaders/assets/bullet/bullet.png")
+            self.image = pygame.transform.rotozoom(self.image, 0, 1 * heightScalar)
             self.rect = self.image.get_rect(midbottom = parentPos)
-            self.speed = speed      
+            self.speed = speed * heightScalar     
         else:
             self.image = pygame.image.load("retro_games/space_invaders/assets/bullet/enemyBullet.png") 
-            self.speed = speed * -1
+            self.image = pygame.transform.rotozoom(self.image, 0, 1 * heightScalar)
+            self.speed = speed * -1 * heightScalar
             self.rect = self.image.get_rect(midtop = parentPos)
     
     def update(self):

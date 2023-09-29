@@ -2,7 +2,7 @@ import pygame
 from math import floor
 
 class Shield(pygame.sprite.Sprite):
-    def __init__(self, pos):
+    def __init__(self, pos, screenWidth, screenHeight):
         super().__init__()
 
         sh1 = pygame.image.load("retro_games/space_invaders/assets/shield/shield1.png")
@@ -16,8 +16,10 @@ class Shield(pygame.sprite.Sprite):
         self.state = 0
 
         self.image = self.frames[self.state]
-        self.image = pygame.transform.scale(self.image, (72, 56))
+        self.image = pygame.transform.scale(self.image, (screenWidth * 3/25, screenHeight * 14/225))
         self.rect = self.image.get_rect(center = pos)
+        self.screenWidth = screenWidth
+        self.screenHeight = screenHeight
     
     def nextState(self):
         self.state += 0.4
@@ -25,4 +27,4 @@ class Shield(pygame.sprite.Sprite):
             self.kill()
         else:
             self.image = self.frames[floor(self.state)]
-            self.image = pygame.transform.scale(self.image, (72, 56))
+            self.image = pygame.transform.scale(self.image, (self.screenWidth * 3/25, self.screenHeight * 14/225))

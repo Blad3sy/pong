@@ -16,6 +16,10 @@ pygame.init()
 
 def start(destination):
 
+    global width
+    global height
+    global generalHeightScalar
+
     player.empty()
     enemies.empty()
     bullets.empty()
@@ -33,40 +37,52 @@ def start(destination):
     global shootCooldown
     shootCooldown = 60
 
-    player.add(Player((300, 780)))
+    player.add(Player((int(width / 2), int(height * 13/15)), generalHeightScalar, generalWidthScalar))
 
-    shields.add(Shield((75, 700)))
-    shields.add(Shield((225, 700)))
-    shields.add(Shield((375, 700)))
-    shields.add(Shield((525, 700)))
+    shields.add(Shield((int(width / 8), int(height * 7/9)), width, height))
+    shields.add(Shield((int(width * 3/8), int(height * 7/9)), width, height))
+    shields.add(Shield((int(width * 5/8), int(height * 7/9)), width, height))
+    shields.add(Shield((int(width * 7/8), int(height * 7/9)), width, height))
     
-    for i in range(80, 560, 40):
-        for t in range(50, 250, 50):
-            enemies.add(Enemy(i, t))
+    for i in range(int(width * 2/15), int(width * 2/15) * 7, int(width * 1/15)):
+        for t in range(int(height * 1/18), int(height * 1/18) * 5, int(height * 1/18)):
+            enemies.add(Enemy(i, t, height, width, generalWidthScalar, generalHeightScalar))
     
-    for i in range(80, 560, 40):
-        for t in range(270, 370, 50):
-            enemies.add(Enemy(i, t))
+    for i in range(int(width * 2/15), int(width * 2/15) * 7, int(width * 1/15)):
+        for t in range(int(height * 1/18) + int(height * 11/45), int(height * 1/18) * 5 + int(height * 2/15), int(height * 1/18)):
+            enemies.add(Enemy(i, t, height, width, generalWidthScalar, generalHeightScalar))
 
     global changeDir
     global changeCooldown
     changeDir = False
     changeCooldown = 0  
 
+
+# General Scalars
+width = 400
+height = 600
+
+generalWidthScalar = width / 600
+generalHeightScalar = height / 900
+
 # Screen
-screen = pygame.display.set_mode((600, 900))
+screen = pygame.display.set_mode((width, height))
 screenRect = screen.get_rect(topleft = (0, 0))
 pygame.display.set_caption("Space Invaders")
 
 background = pygame.image.load("retro_games/space_invaders/assets/screen/background.png")
-mainFont = pygame.font.Font("retro_games/space_invaders/assets/Pixeltype.ttf", 65)
+background = pygame.transform.scale(background, (width, height))
+mainFont = pygame.font.Font("retro_games/space_invaders/assets/Pixeltype.ttf", int(65 * generalHeightScalar))
 
 gameover = pygame.image.load("retro_games/space_invaders/assets/screen/gameover.png")
+gameover = pygame.transform.scale(gameover, (width, height))
 startscreen = pygame.image.load("retro_games/space_invaders/assets/screen/startscreen.png")
+startscreen = pygame.transform.scale(startscreen, (width, height))
 victoryscreen = pygame.image.load("retro_games/space_invaders/assets/screen/victoryscreen.png")
+victoryscreen = pygame.transform.scale(victoryscreen, (width, height))
 
 playerLifeIndicator = pygame.image.load("retro_games/space_invaders/assets/player/player.png")
-playerLifeIndicator = pygame.transform.rotozoom(playerLifeIndicator, 0, 0.1)
+playerLifeIndicator = pygame.transform.rotozoom(playerLifeIndicator, 0, 0.1 * generalHeightScalar)
 
 screenmode = 2
 
@@ -97,7 +113,7 @@ while True:
             exit()
         if event.type == pygame.KEYDOWN and screenmode == 0:
             if event.key == pygame.K_SPACE and shootCooldown <= 0:
-                bullets.add(Bullet((player.sprite.rect.center), 20, True))
+                bullets.add(Bullet((player.sprite.rect.center), 20, True, generalHeightScalar))
                 shootCooldown = 60
         elif event.type == pygame.KEYDOWN and screenmode == 1:
             start(2)
@@ -123,12 +139,12 @@ while True:
 
         for enemy in enemies:
             # LOSE CONDITION
-            if enemy.rect.y >= 650:
+            if enemy.rect.y >= height * 13/18:
                 screenmode = 1
-            if enemy.rect.right >= 580 or enemy.rect.left <= 10:
+            if enemy.rect.right >= width * 29/30 or enemy.rect.left <= width * 1/60:
                 changeDir = True
             if enemy.bullet_shoot() == 69:
-                enemyBullets.add(Bullet((enemy.rect.center), enemy.bulletSpeed, False))
+                enemyBullets.add(Bullet((enemy.rect.center), enemy.bulletSpeed, False, generalHeightScalar))
         
         collisions = pygame.sprite.groupcollide(shields, enemyBullets, False, True)
         if collisions:
@@ -151,12 +167,12 @@ while True:
         screen.blit(background, screenRect.topleft)
 
         playerLivesDisplay = mainFont.render(str(playerLives), False, 'White')
-        screen.blit(playerLivesDisplay, (30, 850))
+        screen.blit(playerLivesDisplay, (width * 1/20, height * 17/18))
 
         if playerLives > 2:
-            screen.blit(playerLifeIndicator, (120, 850))
+            screen.blit(playerLifeIndicator, (width * 1/5, height * 17/18))
         if playerLives > 1:
-            screen.blit(playerLifeIndicator, (70, 850))
+            screen.blit(playerLifeIndicator, (width * 7/60, height * 17/18))
 
         player.draw(screen)
         player.update()
