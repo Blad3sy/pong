@@ -1,4 +1,5 @@
 import pygame
+from screeninfo import get_monitors
 from sys import exit
 from player import Player
 from bullet import Bullet
@@ -59,8 +60,13 @@ def start(destination):
 
 
 # General Scalars
-width = 400
-height = 600
+
+for m in get_monitors():
+    height = m.height * 5/6
+
+width = height * 2/3
+
+print(height, width)
 
 generalWidthScalar = width / 600
 generalHeightScalar = height / 900
