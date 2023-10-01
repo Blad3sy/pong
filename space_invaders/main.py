@@ -6,7 +6,8 @@ from bullet import Bullet
 from enemy import Enemy
 from shield import Shield
 
-# TODO : ADD START MENU / GAME OVER MENU / VICTORY MENU
+# May come back to these in the future but if i'm being honest this is a silly little game and these really aren't that necessary. 
+
 # TODO : ADD SOUND EFFECTS
 # TODO : ADD OTHER ALIEN TYPES?
 # TODO : BETTER / BONUS ANIMATIONS
@@ -65,8 +66,6 @@ for m in get_monitors():
     height = m.height * 5/6
 
 width = height * 2/3
-
-print(height, width)
 
 generalWidthScalar = width / 600
 generalHeightScalar = height / 900

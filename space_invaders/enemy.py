@@ -22,7 +22,7 @@ class Enemy(pygame.sprite.Sprite):
         self.movementVal = 8 * widthScalar
         self.movementCooldownBase = 80
         self.movementCooldown = 80
-        self.speedup = 400
+        self.speedup = 500
         self.randomUpperLimit = 1000
         self.drop = False
         self.bulletSpeed = 15
