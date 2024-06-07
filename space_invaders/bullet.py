@@ -3,6 +3,7 @@ import pygame
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, parentPos, speed, friendly, heightScalar):
         super().__init__()
+        self.heightScalar = heightScalar
         if friendly:
             self.image = pygame.image.load("retro_games/space_invaders/assets/bullet/bullet.png")
             self.image = pygame.transform.rotozoom(self.image, 0, 1 * heightScalar)
@@ -16,5 +17,5 @@ class Bullet(pygame.sprite.Sprite):
     
     def update(self):
         self.rect.y -= self.speed
-        if self.rect.bottom >= 800:
+        if self.rect.bottom >= 800 * self.heightScalar:
             self.kill()
